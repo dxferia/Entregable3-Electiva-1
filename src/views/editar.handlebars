@@ -1,0 +1,46 @@
+<style>
+    .edicion { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 2rem; min-height: calc(100svh - 92px); padding-block: 2rem 4rem; }
+    .edicion h1 { font-size: clamp(2.4rem, 6vw, 4.4rem); }
+    .edicion .subtitulo { text-transform: none; letter-spacing: .02em; font-style: italic; }
+    .edicion .trogon { justify-self: end; width: min(100%, 400px); aspect-ratio: 640 / 896; }
+    .ficha { display: flex; flex-wrap: wrap; gap: .4rem 2rem; margin: 0 0 2rem; color: var(--suave); font-size: .9rem; }
+    .ficha b { color: #fff; font-weight: 600; }
+    .edicion form { max-width: 36rem; }
+    .edicion .acciones { grid-column: 1 / -1; margin-top: .6rem; }
+    @media (max-width: 820px) {
+        .edicion { grid-template-columns: 1fr; min-height: auto; gap: 0; padding-block: 1.5rem 3rem; }
+        .edicion .trogon { justify-self: center; width: min(70%, 280px); margin-top: 2rem; }
+    }
+</style>
+
+<section class="edicion contenedor">
+    <div>
+        <p class="etiqueta">Editar avistamiento</p>
+        <h1>{{avistamiento.nombreComun}}</h1>
+        <p class="subtitulo">{{avistamiento.nombreCientifico}}</p>
+        <p class="ficha">
+            <span>Categoría: <b>{{avistamiento.categoria}}</b></span>
+            <span>Investigador: <b>{{avistamiento.investigador}}</b></span>
+            <span>Registrado: <b>{{fecha avistamiento.fechaRegistro}}</b></span>
+            <span>ID: <b>{{avistamiento._id}}</b></span>
+        </p>
+
+        <form class="campos" action="/api/avistamientos/update/{{avistamiento._id}}" method="POST">
+            <label>Zona
+                <input name="zona" value="{{avistamiento.zona}}" required>
+            </label>
+            <label>Estado de conservación
+                <select name="estadoConservacion">
+                    {{#each estadosConservacion}}
+                        <option {{seleccionado this ../avistamiento.estadoConservacion}}>{{this}}</option>
+                    {{/each}}
+                </select>
+            </label>
+            <div class="acciones">
+                <button type="submit">Guardar cambios</button>
+                <a class="boton boton-linea" href="/">Volver</a>
+            </div>
+        </form>
+    </div>
+    <img class="fauna trogon" src="/img/trogon-enmascarado.jpg" alt="Trogón enmascarado (Trogon personatus)">
+</section>
