@@ -4,7 +4,7 @@
   "description": "Sistema de Monitoreo de Biodiversidad y Avistamientos del Piedemonte Amazónico (BioCaquetá)",
   "main": "src/app.js",
   "scripts": {
-    "start": "node src/app.js",
+    "start": "node --watch src/app.js",
     "dev": "node --watch src/app.js"
   },
   "keywords": ["express", "mongoose", "mongodb-atlas", "handlebars"],
